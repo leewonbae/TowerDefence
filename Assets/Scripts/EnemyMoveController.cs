@@ -12,8 +12,6 @@ public class EnemyMoveController : MonoBehaviour
 
     private List<Transform> _waypointList;
     private int _targetIndex = 0;
-    private float _distanceToNextWaypoint;
-    private Vector3 _startPosition;
 
     void Awake()
     {
@@ -24,8 +22,6 @@ public class EnemyMoveController : MonoBehaviour
     {
         // 시작 위치로 이동
         transform.position = _waypointList[_targetIndex].position;
-        _startPosition = transform.position;
-        _distanceToNextWaypoint = 0;
     }
 
     // Update is called once per frame
@@ -36,12 +32,10 @@ public class EnemyMoveController : MonoBehaviour
             return;
         }
 
-        float step = _moveSpeed * Time.deltaTime;
-
         transform.position = Vector3.MoveTowards(
             transform.position,              // 현재 위치
             _waypointList[_targetIndex + 1].position, // 목표 위치
-            step                             // 이번 프레임에 이동할 최대 거리
+            _moveSpeed * Time.deltaTime                             // 이번 프레임에 이동할 최대 거리
         );
 
         if (Vector3.Distance(_waypointList[_targetIndex + 1].position, transform.position) <= 0.1f)
@@ -49,9 +43,10 @@ public class EnemyMoveController : MonoBehaviour
             _targetIndex++;
         }
 
+        // 마지막 인덱스인 경우 다시 처음 것으로 셋
         if (_targetIndex == _waypointList.Count - 1)
         {
-            this.gameObject.SetActive(false);
+            _targetIndex = -1;
         }
     }
 

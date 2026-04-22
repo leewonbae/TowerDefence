@@ -3,7 +3,8 @@ using TMPro;
 using TowerDefenceCommons;
 using UnityEngine;
 
-public class InGameTimer : MonoBehaviour
+public class InGameTimer
+    : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _timerText;
 
@@ -37,7 +38,7 @@ public class InGameTimer : MonoBehaviour
         if (_lastDisplaySeconds != displayTime)
         {
             _lastDisplaySeconds = displayTime;
-            
+
             _timerText.text = $"Remain Time Until Start: {_lastDisplaySeconds} s";
         }
 

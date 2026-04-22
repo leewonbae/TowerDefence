@@ -6,6 +6,13 @@ namespace TowerDefenceCommons
         public const int PlayTimeLimitSeconds = 10;
     }
 
+    public enum E_PLYAER_TYPE
+    {
+        NONE,
+        PLAYER_A,
+        PLAYER_B,
+    }
+
     public enum E_INGAME_STATE
     {
         INIT,
